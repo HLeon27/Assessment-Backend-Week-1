@@ -9,13 +9,15 @@ from flask import Flask, Response, request, jsonify
 from date_functions import (convert_to_datetime, get_day_of_week_on,
                             get_days_between, get_current_age)
 
-app_history = []
 
 app = Flask(__name__)
+
+app_history = []
 
 
 def add_to_history(current_request):
     """Adds a route to the app history."""
+
     app_history.append({
         "method": current_request.method,
         "at": datetime.now().strftime("%d/%m/%Y %H:%M"),
@@ -35,7 +37,7 @@ def index():
 
 
 @app.post("/between")
-def get_days_between_dates():
+def between():
     if request.method != "POST":
         return 405
     data = request.get_json()
@@ -54,7 +56,7 @@ def get_days_between_dates():
 
 
 @app.post("/weekday")
-def get_weekday():
+def weekday():
     if request.method != "POST":
         return 405
     data = request.get_json()
@@ -71,6 +73,50 @@ def get_weekday():
     weekday = get_day_of_week_on(request_datetime)
     add_to_history(request)
     return {"weekday": weekday}, 200
+
+
+@app.route("/history", methods=["GET", "DELETE"])
+def history():
+    add_to_history(request)
+    if request.method not in ["GET", "DELETE"]:
+        return 405
+    if request.method == "DELETE":
+        clear_history()
+        return {"status": "History cleared"}, 200
+    if request.method == "GET":
+        args = request.args.to_dict()
+        request_number = args.get("number", "5")
+
+        if not request_number.isdigit() or int(request_number) not in range(1, 21):
+            return {"error": "Number must be an integer between 1 and 20."}, 400
+
+        history_response = []
+        if int(request_number) > len(app_history):
+            request_number = str(len(app_history))
+
+        reverse_history = app_history[::-1]
+        for index in range(int(request_number)):
+            history_response.append(reverse_history[index])
+
+        return history_response, 200
+
+
+@app.get("/current_age")
+def current_age():
+    if request.method != "GET":
+        return 405
+    args = request.args.to_dict()
+    request_date = args.get("date")
+    if not request_date:
+        return {"error": "Date parameter is required."}, 400
+    if not isinstance(request_date, str):
+        return {"error": "Value for date parameter is invalid."}, 400
+    split_date = request_date.split("-")
+    if len(split_date) == 1 or len(split_date[0]) < 4:
+        return {"error": "Value for date parameter is invalid."}, 400
+    age = get_current_age(request_date)
+    add_to_history(request)
+    return {"current_age": age}, 200
 
 
 if __name__ == "__main__":

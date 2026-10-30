@@ -1,0 +1,67 @@
+[
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "POST",
+        "at": "30/10/2026 16:00",
+        "route": "weekday"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "POST",
+        "at": "30/10/2026 16:00",
+        "route": "between"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "POST",
+        "at": "30/10/2026 16:00",
+        "route": "weekday"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    },
+    {
+        "method": "GET",
+        "at": "30/10/2026 16:00",
+        "route": "history"
+    }
+]
