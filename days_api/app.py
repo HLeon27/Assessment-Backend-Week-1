@@ -22,6 +22,7 @@ def add_to_history(current_request):
         "route": current_request.endpoint
     })
 
+
 def clear_history():
     """Clears the app history."""
     app_history.clear()
@@ -31,6 +32,25 @@ def clear_history():
 def index():
     """Returns an API welcome messsage."""
     return jsonify({"message": "Welcome to the Days API."})
+
+
+@app.post("/between")
+def get_days_between_dates():
+    if request.method != "POST":
+        return 405
+    data = request.get_json()
+    if "first" not in data or "last" not in data:
+        return {"error": "Missing required data."}, 400
+    if not isinstance(data["first"], str) or not isinstance(data["last"], str):
+        return {"error": "Unable to convert value to datetime."}, 400
+    if len(data["first"].split(".")) == 1 or len(data["last"].split(".")) == 0:
+        return {"error": "Unable to convert value to datetime."}, 400
+
+    first = convert_to_datetime(data["first"])
+    last = convert_to_datetime(data["last"])
+    days_diff = get_days_between(first, last)
+    add_to_history(request)
+    return {"days": days_diff}, 200
 
 
 if __name__ == "__main__":
