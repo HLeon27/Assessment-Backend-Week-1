@@ -7,11 +7,12 @@ def convert_to_datetime(date_val: str) -> datetime:
     """Function takes in a string and converts it to a datetime object."""
     try:
         return datetime.strptime(date_val, "%d.%m.%Y")
-    except ValueError:
-        raise ValueError("Unable to convert value to datetime.")
+    except ValueError as exc:
+        raise ValueError("Unable to convert value to datetime.") from exc
 
 
 def get_days_between(first: datetime, last: datetime) -> int:
+    """Function returns the day difference between two dates."""
     if not isinstance(first, datetime) or not isinstance(last, datetime):
         raise TypeError("Datetimes required.")
     time_delta = last - first
@@ -19,6 +20,7 @@ def get_days_between(first: datetime, last: datetime) -> int:
 
 
 def get_day_of_week_on(date_val: datetime) -> str:
+    """Function returns the day of the week."""
     if not isinstance(date_val, datetime):
         raise TypeError("Datetime required.")
     day_of_week_key = {
@@ -35,6 +37,7 @@ def get_day_of_week_on(date_val: datetime) -> str:
 
 
 def get_current_age(birthdate: date) -> int:
+    """Function returns current age."""
     if not isinstance(birthdate, date):
         raise TypeError("Date required.")
 

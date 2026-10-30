@@ -2,9 +2,9 @@
 
 # pylint: disable = no-name-in-module
 
-from datetime import datetime, date
+from datetime import datetime
 
-from flask import Flask, Response, request, jsonify
+from flask import Flask, request, jsonify
 
 from date_functions import (convert_to_datetime, get_day_of_week_on,
                             get_days_between, get_current_age)
@@ -38,6 +38,7 @@ def index():
 
 @app.post("/between")
 def between():
+    """Endpoint to get difference between two days."""
     if request.method != "POST":
         return 405
     data = request.get_json()
@@ -57,6 +58,7 @@ def between():
 
 @app.post("/weekday")
 def weekday():
+    """Endpoint to get the day of the week."""
     if request.method != "POST":
         return 405
     data = request.get_json()
@@ -70,13 +72,14 @@ def weekday():
         return {"error": "Unable to convert value to datetime."}, 400
 
     request_datetime = convert_to_datetime(request_date)
-    weekday = get_day_of_week_on(request_datetime)
+    weekday_response = get_day_of_week_on(request_datetime)
     add_to_history(request)
-    return {"weekday": weekday}, 200
+    return {"weekday": weekday_response}, 200
 
 
 @app.route("/history", methods=["GET", "DELETE"])
 def history():
+    """Endpoint to retrieve API history."""
     add_to_history(request)
     if request.method not in ["GET", "DELETE"]:
         return 405
@@ -95,14 +98,15 @@ def history():
             request_number = str(len(app_history))
 
         reverse_history = app_history[::-1]
-        for index in range(int(request_number)):
-            history_response.append(reverse_history[index])
+        for i in range(int(request_number)):
+            history_response.append(reverse_history[i])
 
-        return history_response, 200
+    return history_response, 200
 
 
 @app.get("/current_age")
 def current_age():
+    """Endpoint to get a current age."""
     if request.method != "GET":
         return 405
     args = request.args.to_dict()
