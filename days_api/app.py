@@ -53,6 +53,26 @@ def get_days_between_dates():
     return {"days": days_diff}, 200
 
 
+@app.post("/weekday")
+def get_weekday():
+    if request.method != "POST":
+        return 405
+    data = request.get_json()
+    request_date = data.get("date")
+    if not request_date:
+        return {"error": "Missing required data."}, 400
+    if not isinstance(request_date, str):
+        return {"error": "Unable to convert value to datetime."}, 400
+    split_date = request_date.split(".")
+    if len(split_date) == 1 or len(split_date[-1]) < 4:
+        return {"error": "Unable to convert value to datetime."}, 400
+
+    request_datetime = convert_to_datetime(request_date)
+    weekday = get_day_of_week_on(request_datetime)
+    add_to_history(request)
+    return {"weekday": weekday}, 200
+
+
 if __name__ == "__main__":
     app.config['TESTING'] = True
     app.config['DEBUG'] = True
