@@ -2,10 +2,13 @@
 platform linux -- Python 3.12.15, pytest-9.2.0, pluggy-1.7.0
 rootdir: /home/runner/work/Assessment-Backend-Week-1/Assessment-Backend-Week-1
 plugins: platformdirs-4.14.0
-collected 0 items / 1 error
+collected 112 items
 
-!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-=============================== 1 error in 0.16s ===============================
+days_api/test_api.py ................................................... [ 45%]
+......................                                                   [ 65%]
+days_api/test_date_functions.py .......................................  [100%]
+
+============================= 112 passed in 0.28s ==============================
 ************* Module app
 days_api/app.py:40:0: C0116: Missing function or method docstring (missing-function-docstring)
 days_api/app.py:59:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -17,12 +20,11 @@ days_api/app.py:105:0: C0116: Missing function or method docstring (missing-func
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
 ************* Module date_functions
-days_api/date_functions.py:4:0: E0401: Unable to import 'dateutil.relativedelta' (import-error)
-days_api/date_functions.py:12:8: W0707: Consider explicitly re-raising using 'except ValueError as exc' and 'raise ValueError('Unable to convert value to datetime.') from exc' (raise-missing-from)
-days_api/date_functions.py:15:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/date_functions.py:22:0: C0116: Missing function or method docstring (missing-function-docstring)
-days_api/date_functions.py:38:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/date_functions.py:11:8: W0707: Consider explicitly re-raising using 'except ValueError as exc' and 'raise ValueError('Unable to convert value to datetime.') from exc' (raise-missing-from)
+days_api/date_functions.py:14:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/date_functions.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/date_functions.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
 
 -----------------------------------
-Your code has been rated at 8.32/10
+Your code has been rated at 8.82/10
 
