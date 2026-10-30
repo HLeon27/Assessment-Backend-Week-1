@@ -1,7 +1,6 @@
 """Functions for working with dates."""
 
 from datetime import datetime, date
-from dateutil.relativedelta import relativedelta
 
 
 def convert_to_datetime(date_val: str) -> datetime:
@@ -38,9 +37,14 @@ def get_day_of_week_on(date_val: datetime) -> str:
 def get_current_age(birthdate: date) -> int:
     if not isinstance(birthdate, date):
         raise TypeError("Date required.")
-    years = relativedelta(date.today(), birthdate).years
-    if years < 0:
-        return years - 1
+
+    current_date = date.today()
+    years = current_date.year - birthdate.year
+    if current_date.month < birthdate.month:
+        years -= 1
+    elif current_date.month == birthdate.month:
+        if current_date.day < birthdate.day:
+            years -= 1
     return years
 
 
