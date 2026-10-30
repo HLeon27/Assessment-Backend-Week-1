@@ -5,12 +5,12 @@ plugins: platformdirs-4.14.0
 collected 0 items / 1 error
 
 !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-=============================== 1 error in 0.18s ===============================
+=============================== 1 error in 0.19s ===============================
 ************* Module app
 days_api/app.py:38:0: C0116: Missing function or method docstring (missing-function-docstring)
+days_api/app.py:57:0: C0116: Missing function or method docstring (missing-function-docstring)
 days_api/app.py:5:0: W0611: Unused date imported from datetime (unused-import)
 days_api/app.py:7:0: W0611: Unused Response imported from flask (unused-import)
-days_api/app.py:9:0: W0611: Unused get_day_of_week_on imported from date_functions (unused-import)
 days_api/app.py:9:0: W0611: Unused get_current_age imported from date_functions (unused-import)
 ************* Module date_functions
 days_api/date_functions.py:4:0: E0401: Unable to import 'dateutil.relativedelta' (import-error)
@@ -20,5 +20,5 @@ days_api/date_functions.py:22:0: C0116: Missing function or method docstring (mi
 days_api/date_functions.py:38:0: C0116: Missing function or method docstring (missing-function-docstring)
 
 -----------------------------------
-Your code has been rated at 7.54/10
+Your code has been rated at 8.08/10
 
